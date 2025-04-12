@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Tienda Online</title>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap" rel="stylesheet">
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Poppins', sans-serif;
+      background: #f4f4f4;
+    }
+
+    header {
+      position: fixed;
+      top: 0;
+      width: 100%;
+      background: linear-gradient(to right, blue, green);
+      color: white;
+      display: flex;
+      align-items: center;
+      padding: 8.5px 14px;
+      z-index: 1000;
+      height: 6vh;
+      font-size: 12px;
+    }
+
+    header img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .banner {
+      margin-top: 80px;
+      margin-left: 10px;
+      margin-right: 10px;
+      margin-bottom: 20px;
+      width: calc(100% - 20px);
+      height: 100px;
+      background: url('ambientador.jpg') center/cover no-repeat;
+      border-top-left-radius: 10px;
+      border-top-right-radius: 10px;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+    }
+
+    .descripcion {
+      padding: 20px;
+      text-align: center;
+      background: #fff;
+    }
+
+    .productos {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      padding: 20px;
+      gap: 20px;
+    }
+
+    .producto {
+      width: 95vw;
+      max-width: 350px;
+      background: #fff;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .producto-imagen {
+      position: relative;
+      width: 100%;
+      height: 370px;
+      overflow: hidden;
+      cursor: pointer;
+    }
+
+    .producto-imagen img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      transition: transform 0.3s ease;
+    }
+
+    .producto-imagen:hover img {
+      transform: scale(1.05);
+    }
+
+    .precio-overlay {
+      position: absolute;
+      bottom: 0;
+      left: 0;
+      background: linear-gradient(to right, blue, green);
+      color: white;
+      padding: 8px;
+      font-weight: bold;
+      width: 100%;
+      box-sizing: border-box;
+      height: 40px;
+    }
+
+    .producto-contenido {
+      padding: 15px;
+      display: flex;
+      flex-direction: column;
+      align-items: stretch;
+    }
+
+    .producto-contenido h3 {
+      align-self: flex-start;
+      margin: 10px 0 5px;
+      font-family: 'Arial Black', sans-serif;
+    }
+
+    .producto-contenido p {
+      align-self: flex-start;
+      font-size: 16px;
+      color: #666;
+      text-align: left;
+      width: 100%;
+    }
+
+    .producto-contenido button {
+      background-image: url("ic-whatsapp.jpg");
+	  background-position: 97% center;
+	  background-size: 35px 35px;
+	  background-repeat: no-repeat;
+      width: 100%;
+      margin-top: 10px;
+      padding: 10px 20px;
+      border: none;
+      background: #28a745;
+      color: white;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 16px;
+      text-align: center;
+    }
+
+    .producto-contenido button:hover {
+      background: #218838;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.8);
+      justify-content: center;
+      align-items: center;
+      z-index: 2000;
+    }
+
+    .modal-content {
+      background: #fff;
+      padding: 20px;
+      border-radius: 10px;
+      max-width: 90%;
+      text-align: center;
+    }
+
+    .modal-content img {
+      width: 100%;
+      max-height: 400px;
+      object-fit: cover;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <img src="logo.jpg" alt="Logo">
+    <h1>Avax Shopp Web</h1>
+  </header>
+
+  <div class="banner"></div>
+
+  <div class="descripcion">
+    <p>Bienvenido a nuestro catálogo online. Aquí encontrarás los mejores productos de limpieza al mejor precio.</p>
+  </div>
+
+  <div class="productos">
+    <!-- 10 productos -->
+        <div class="producto">
+          <div class="producto-imagen" onclick="abrirModal('acido.jpg', 'Acido para la limpieza ')">
+            <img src="acido.jpg" alt="Producto">
+            <div class="precio-overlay">$250 Cup</div>
+          </div>
+          <div class="producto-contenido">
+            <h3>Ácido Para Limpieza 1Lt </h3>
+            <p>Excelente para remover manchas y ablandar suciedades viejas. <br> Domicilio por 50 cup.</p>
+            <a href="chat.html">
+            <button>Toca Para Pedir El Producto</button>
+            </a>
+          </div>
+        </div>
+    </script>
+  </div>
+  
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <img id="modal-img" src="" alt="Imagen Ampliada">
+      <p id="modal-desc"></p>
+    </div>
+  </div>
+  
+  <br>
+  
+  <div class="productos">
+    <!-- 10 productos -->
+        <div class="producto">
+          <div class="producto-imagen" onclick="abrirModal('ambientador.jpg', 'Ambientador Fresco')">
+            <img src="ambientador.jpg" alt="">
+            <div class="precio-overlay">$300 Cup</div>
+          </div>
+          <div class="producto-contenido">
+            <h3> Ambientador Fresco 1Lt</h3>
+            <p>Excelente para ambientar con un excelente aroma tu hogar o local. <br> Domicilio por 50 cup.</p>
+            <a href="chat.html">
+            <button>Toca Para Pedir El Producto</button>
+            </a>
+          </div>
+        </div>
+    </script>
+  </div>
+
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <img id="modal-img" src="" alt="Imagen Ampliada">
+      <p id="modal-desc"></p>
+    </div>
+  </div>
+  
+  
+<div class="productos">
+    <!-- 10 productos -->
+        <div class="producto">
+          <div class="producto-imagen" onclick="abrirModal('desencrustante.jpg', 'Desencrustante Para Baños')">
+            <img src="desencrustante.jpg" alt="">
+            <div class="precio-overlay">$300 Cup</div>
+          </div>
+          <div class="producto-contenido">
+            <h3> Desencruntaste Para Baños 1Lt</h3>
+            <p>Ideal para quitar el sarro de tu baño. <br> Domicilio por 50 cup.</p>
+            <a href="chat.html">
+            <button>Toca Para Pedir El Producto</button>
+            </a>
+          </div>
+        </div>
+    </script>
+  </div>
+
+<div class="productos">
+    <!-- 10 productos -->
+        <div class="producto">
+          <div class="producto-imagen" onclick="abrirModal('desengrasante.jpg', 'Desengrasante Para Losas ')">
+            <img src="desengrasante.jpg" alt="">
+            <div class="precio-overlay">$270 Cup</div>
+          </div>
+          <div class="producto-contenido">
+            <h3>Desengrasante Para Losas 1 Botella</h3>
+            <p>El mejor producto que puedes encontrar para remover la grasa y suciedad adherida en tu losas. <br>
+            	Domicilio por 50 cup</p>
+            <a href="chat.html">	
+            <button>Toca Para Pedir El Producto</button>
+            </a>
+          </div>
+        </div>
+    </script>
+  </div>  
+  
+  <div class="modal" id="modal">
+    <div class="modal-content">
+      <img id="modal-img" src="" alt="Imagen Ampliada">
+      <p id="modal-desc"></p>
+    </div>
+  </div>
+  
+<div class="productos">
+    <!-- 10 productos -->
+        <div class="producto">
+          <div class="producto-imagen" onclick="abrirModal('fregasuelos.jpg', 'Fregasuelos Ideal Para Limpiar  ')">
+            <img src="fregasuelos.jpg" alt="">
+            <div class="precio-overlay">$200 Cup</div>
+          </div>
+          <div class="producto-contenido">
+            <h3>Fregasuelos 1Lt</h3>
+            <p>Con solo un poco de este producto ayudas a quitar manchas y suciedad de tu piso ademas de su características frescura y fragancia. <br>
+            	Domicilio por 50 cup</p>
+            <a href="chat.html">	
+            <button>Toca Para Pedir El Producto</button>
+            </a>
+          </div>
+        </div>
+    </script>
+  </div>  
+
+<div class="productos">
+    <!-- 10 productos -->
+        <div class="producto">
+          <div class="producto-imagen" onclick="abrirModal('salfuman.jpg', 'Salfuman ')">
+            <img src="salfuman.jpg" alt="">
+            <div class="precio-overlay">$300 Cup</div>
+          </div>
+          <div class="producto-contenido">
+            <h3>Salfumán 1Lt </h3>
+            <p>El mejor producto eliminar sarro malos olores y manchas en tu baño , losas y otras sonas. <br>
+            	Domicilio por 50 cup</p>
+            <a href="chat.html">	
+            <button>Toca Para Pedir El Producto</button>
+            </a>
+          </div>
+        </div>
+    </script>
+  </div>  
+  
+<div class="productos">
+    <!-- 10 productos -->
+        <div class="producto">
+          <div class="producto-imagen" onclick="abrirModal('cloro.jpg', 'Cloro Casi Puro ')">
+            <img src="cloro.jpg" alt="">
+            <div class="precio-overlay">$80 Cup</div>
+          </div>
+          <div class="producto-contenido">
+            <h3> Cloro 1Lt </h3>
+            <p>Cloro al 90% especial para quitar manchas y suciedad. <br>
+            	Domicilio por 50 cup</p>
+            <a href="chat.html">	
+            <button>Toca Para Pedir El Producto</button>
+            </a>
+          </div>
+        </div>
+    </script>
+  </div>    
+  
+  <script>
+    function abrirModal(src, descripcion) {
+      document.getElementById('modal-img').src = src;
+      document.getElementById('modal-desc').textContent = descripcion;
+      document.getElementById('modal').style.display = 'flex';
+    }
+
+    document.getElementById('modal').addEventListener('click', function() {
+      this.style.display = 'none';
+    });
+  </script>
+
+</body>
+</html>

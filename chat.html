@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Contacto Predefinido WhatsApp</title>
+  <style>
+    body {
+      background-color: #BDBADE;
+      max-width: 90vw;
+      margin: 0 0;
+      padding: 0rem;
+      font-family: Arial, sans-serif;
+    }
+    
+    header {
+      position: fixed;
+      top: 0;
+      width: 100vw;
+      background: linear-gradient(to right, blue, green);
+      color: white;
+      display: flex;
+      align-items: center;
+      padding: 8.5px 14px;
+      z-index: 1000;
+      height: 5vh;
+      font-size: 12px;
+    }
+
+    header img {
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      margin-right: 10px;
+    }
+
+    .banner {
+      margin-top: 80px;
+      margin-left: 8.6%;
+      margin-right: 0px;
+      margin-bottom: 20px;
+      width: calc(100% - 20px);
+      height: 100px;
+      background: url('ambientador.jpg') center/cover no-repeat;
+      border-top-left-radius: 20px;
+      border-top-right-radius: 20px;
+      border-bottom-left-radius: 20px;
+      border-bottom-right-radius: 20px;
+      border: 2px solid #fff;
+    }
+    
+    
+    h1 {
+      text-align: left;
+      font-size: 20px;
+      color: #fff;
+      margin-left: 7.5%;
+    }
+    .contacto-card {
+      background-color: #fff;
+      border: 3px solid #fff;
+      padding-left: 1rem;
+      padding-right: 1rem;
+      border-radius: 5px;
+      margin-bottom: 1rem;
+      width: 90%;
+      margin-left: 4.6%;
+      margin-right: 5%;
+    }
+    
+    label {
+      font-weight: bold;
+      display: block;
+      margin-top: 1rem;
+      margin-bottom: 0.5rem;
+      margin-left: 5%;
+    }
+    
+    textarea {
+    border: 2px solid #fff;
+      border-radius: 7px;
+    margin-left: 4.6%;
+    margin-right: 5%;
+      width: 95.4%;
+      padding: 0.5rem;
+      font-size: 1rem;
+      resize: vertical;
+    }
+    
+    button, a {
+      background-image: url("ic-whatsapp.jpg");
+	  background-position: 97% center;
+	  background-size: 30px 30px;
+	  background-repeat: no-repeat;
+      margin-top: 1rem;
+      padding: 0.5rem 1rem;
+      text-decoration: none;
+      font-weight: bold;
+      background-color: #25D366;
+      color: #fff;
+      border: 2px solid #fff;
+      border-radius: 10px;
+      cursor: pointer;
+      margin-left: 35%;
+      width: 60%;
+      font-size: 14px;
+      margin-right: 0%;
+    }
+    button:hover, a:hover {
+      opacity: 0.9;
+    }
+    a {
+      display: inline-block;
+    }
+  </style>
+</head>
+<body>
+	
+<header>
+    <img src="logo.jpg" alt="Logo">
+    <h1>Avax Shopp Web</h1>
+  </header>
+  
+  <center>
+  <div class="banner"></div>
+  </center>
+  
+  <h1>DESCRIBA Y PIDA SU PRODUCTO DESDÉ AQUI</h1>
+  <div class="contacto-card">
+    <p><strong>Nombre:</strong> Avax Shopp Web</p>
+    <p><strong>Teléfono:</strong> +5359609573</p>
+  </div>
+
+  <label for="mensaje">Que Producto Deseas Comprar ? 💬 :</label>
+    <textarea id="mensaje" rows="3" placeholder="Escribelo aquí ..."></textarea>
+    
+  <div>
+      <a id="chatearLink" href="#" target="_blank" rel="noopener noreferrer">ENVIAR EL MENSAJE </a>
+    </div>
+    
+    
+    
+  <script>
+    // Objeto con el contacto predefinido
+    const contactoPredefinido = {
+      nombre: "avax shopp web",
+      telefono: "+5359609573",
+      mensaje: ""
+    };
+
+    // Intentamos cargar el contacto guardado en localStorage, si existe.
+    let contactoGuardado = localStorage.getItem("contacto");
+    if (contactoGuardado) {
+      contactoGuardado = JSON.parse(contactoGuardado);
+    } else {
+      contactoGuardado = contactoPredefinido;
+    }
+
+    // Referencias a los elementos del DOM
+    const mensajeInput = document.getElementById("mensaje");
+    const guardarBtn = document.getElementById("guardarContacto");
+    const chatearLink = document.getElementById("chatearLink");
+
+    // Rellenar el área de mensaje si existe algún mensaje guardado.
+    mensajeInput.value = contactoGuardado.mensaje;
+
+    // Función para actualizar el enlace de WhatsApp
+    function actualizarEnlace() {
+      // Se limpia el número removiendo caracteres no numéricos (excepto el '+', que se quita en el link)
+      const telLimpio = contactoGuardado.telefono.replace(/\D/g, '');
+      const mensaje = encodeURIComponent(mensajeInput.value);
+      // Si hay mensaje, se añade el parámetro text, de lo contrario solo se marca el teléfono
+      const url = mensaje 
+        ? `https://api.whatsapp.com/send?phone=${telLimpio}&text=${mensaje}` 
+        : `https://api.whatsapp.com/send?phone=${telLimpio}`;
+      chatearLink.href = url;
+    }
+
+    // Actualiza el enlace de WhatsApp al cargar la página
+    actualizarEnlace();
+
+    // Al hacer clic en "Guardar Contacto", se guarda el mensaje en localStorage
+    guardarBtn.addEventListener("click", () => {
+      contactoGuardado.mensaje = mensajeInput.value;
+      localStorage.setItem("contacto", JSON.stringify(contactoGuardado));
+      actualizarEnlace();
+      alert("Contacto guardado correctamente.");
+    });
+
+    // También actualiza el enlace conforme el usuario escribe el mensaje
+    mensajeInput.addEventListener("input", actualizarEnlace);
+  </script>
+</body>
+</html>
